@@ -13,7 +13,10 @@ var youtubeID = regexp.MustCompile(`youtube\.com/embed/([^\&\?\/]+)`)
 var googleMapsID = regexp.MustCompile(`google\.com/maps/d/embed\?mid=([0-9A-Za-z-_]+)`)
 
 func getMarkdownConverter() *md.Converter {
-	converter := md.NewConverter("", true, nil)
+	opt := &md.Options{
+		EmDelimiter: "*",
+	}
+	converter := md.NewConverter("", true, opt)
 	converter.Use(getYouTubeForHugoConverter())
 	converter.Use(getGoogleMapsEmbedForHugoConverter())
 	return converter
